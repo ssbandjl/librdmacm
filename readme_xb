@@ -1,0 +1,38 @@
+struct rdma_event_channel *rdma_create_event_channel(void)
+    ucma_init
+        if (cma_dev_cnt)
+        check_abi_version
+        ibv_get_device_list
+        cma_dev_array = calloc(dev_cnt, sizeof(*cma_dev_array))
+        cma_dev_array[i].guid = ibv_get_device_guid(dev_list[i])
+        ucma_set_af_ib_support()
+            rdma_create_id(NULL, &id, NULL, RDMA_PS_IB)
+                rdma_create_id2
+                    ucma_init
+                    ucma_alloc_id
+                    CMA_INIT_CMD_RESP(&cmd, sizeof cmd, CREATE_ID, &resp, sizeof resp) -> UCMA_CMD_CREATE_ID
+                    ret = write(id_priv->id.channel->fd, &cmd, sizeof cmd)
+                    ucma_insert_id(id_priv)
+            rdma_bind_addr(id, (struct sockaddr *) &sib)
+    channel->fd = open("/dev/infiniband/rdma_cm", O_RDWR | O_CLOEXEC)
+    return channel
+
+
+rdma_listen
+    CMA_INIT_CMD(&cmd, sizeof cmd, LISTEN)
+    ucma_query_addr
+        cmd.option = UCMA_QUERY_ADDR
+
+
+rdma_get_request
+    rdma_get_cm_event
+        retry:
+        CMA_INIT_CMD_RESP(&cmd, sizeof cmd, GET_EVENT, &resp, sizeof resp)
+
+
+examples/rdma_server.c -> main -> run
+    hints.ai_flags = RAI_PASSIVE;
+    hints.ai_port_space = RDMA_PS_TCP
+    rdma_getaddrinfo
+        ucma_init
+        
